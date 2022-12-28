@@ -11,5 +11,4 @@ public interface ICreditCardRepository
     Task<CreditCard> GetCreditCardByIban(string iban);
     Task<CreditCard> GetCreditCard(string iban, DateOnly date, long cvv);
     Task<List<CreditCard>> GetAllCreditCards();
-    Task<List<CreditCard>> GetCreditCardsByUserId(long userId);
 }

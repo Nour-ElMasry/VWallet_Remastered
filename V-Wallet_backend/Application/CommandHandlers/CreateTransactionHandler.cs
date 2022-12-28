@@ -28,13 +28,16 @@ public class CreateTransactionHandler : IRequestHandler<CreateTransaction, Trans
         sendingCC.Deposit -= request.Amount;
         receivingCC.Deposit += request.Amount;
 
-        var trans = new Transaction(request.Amount, receivingCC, sendingCC);
+        var tranSend = new Transaction(request.Amount, sendingCC);
         
-        sendingCC.Transactions.Add(trans);
-        receivingCC.Transactions.Add(trans);
+        sendingCC.Transactions.Add(tranSend);
+
+        var tranReceive = new Transaction(-request.Amount, receivingCC);
+
+        receivingCC.Transactions.Add(tranReceive);
 
         await _unitOfWork.Save();
 
-        return trans;
+        return tranSend;
     }
 }

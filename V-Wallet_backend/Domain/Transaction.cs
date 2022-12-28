@@ -9,18 +9,14 @@ public class Transaction
     public long TransactionId { get; set; }
     public long Amount { get; set; }
     public DateTime DateOfTransaction { get; set; }
-    
-    [ForeignKey("ReceivingCCId")]
-    public CreditCard ReceivingCC { get; set; }
 
-    [ForeignKey("SendingCCId")]
-    public CreditCard SendingCC { get; set; }
+    [ForeignKey("CCId")]
+    public CreditCard CC { get; set; }
 
-    public Transaction(long amount, CreditCard receivingCC, CreditCard sendingCC)
+    public Transaction(long amount, CreditCard cc)
     {
         Amount = amount;
-        ReceivingCC = receivingCC;
-        SendingCC = sendingCC;
+        CC = cc;
         DateOfTransaction = DateTime.UtcNow;
     }
 
