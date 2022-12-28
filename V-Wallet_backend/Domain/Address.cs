@@ -5,7 +5,6 @@ public class Address
 {
     [Key]
     public long AddressId { get; set; }
-
     public String Country { get; set; }
     public String City { get; set; }
     public String Street { get; set; }

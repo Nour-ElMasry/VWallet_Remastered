@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain;
+using MediatR;
 
-namespace Application.Commands
+namespace Application.Commands;
+
+public class UpdateUser : IRequest<User>
 {
-    internal class UpdateUser
-    {
-    }
+    public String UserId { get; set; }
+    public String Name { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public String Country { get; set; }
+    public String City { get; set; }
+    public String Street { get; set; }
 }
