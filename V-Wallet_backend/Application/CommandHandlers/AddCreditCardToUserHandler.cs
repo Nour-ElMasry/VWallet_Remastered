@@ -20,7 +20,7 @@ public class AddCreditCardToUserHandler : IRequestHandler<AddCreditCardToUser, U
 
     public async Task<User> Handle(AddCreditCardToUser request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == request.UserId);
+        var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken: cancellationToken);
         var creditCard = await _unitOfWork.CreditCardRepository.GetCreditCard(request.Iban, request.ExpirtationDate, request.Cvv);
 
         if (creditCard == null || user == null)
