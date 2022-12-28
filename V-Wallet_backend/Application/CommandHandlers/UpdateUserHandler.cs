@@ -18,7 +18,9 @@ public class UpdateUserHandler : IRequestHandler<UpdateUser, User>
 
     public async Task<User> Handle(UpdateUser request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.Users.Include(u => u.UserAddress).FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken: cancellationToken);
+        var user = await _userManager.Users
+            .Include(u => u.UserAddress)
+            .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken: cancellationToken);
 
         if (user == null)
             return null;

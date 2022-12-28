@@ -1,7 +1,7 @@
 ﻿namespace Domain;
 public static class CreditCardBuilder
 {
-    private static readonly Random random = new Random();
+    private static readonly Random random = new();
     public static String GenerateIban()
     {
         string countryCode = "RO";

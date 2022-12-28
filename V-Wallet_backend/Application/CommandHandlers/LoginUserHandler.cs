@@ -25,7 +25,9 @@ public class LogInUserHandler : IRequestHandler<LoginUser, Object>
 
     public async Task<Object> Handle(LoginUser request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.Users.Include(u => u.UserAddress).FirstOrDefaultAsync(u => u.UserName == request.UserName, cancellationToken: cancellationToken);
+        var user = await _userManager.Users
+            .Include(u => u.UserAddress)
+            .FirstOrDefaultAsync(u => u.UserName == request.UserName, cancellationToken: cancellationToken);
 
         if (user != null && await _userManager.CheckPasswordAsync(user, request.Password))
         {

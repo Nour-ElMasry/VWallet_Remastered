@@ -10,8 +10,8 @@ public class User : IdentityUser
     [ForeignKey("UserAddressId")]
     public Address UserAddress { get; set; }
 
-    public IList<CreditCard> CreditCards { get; set; }
-    public IList<CryptoCurrency> CryptoCurrencies { get; set; }
+    public List<CreditCard> CreditCards { get; set; } = new();
+    public List<CryptoCurrency> CryptoCurrencies { get; set; } = new();
 
 
     public User(string name, DateTime dateOfBirth, Address userAddress)
@@ -19,8 +19,6 @@ public class User : IdentityUser
         Name = name;
         DateOfBirth = dateOfBirth;
         UserAddress = userAddress;
-        CreditCards = new List<CreditCard>();
-        CryptoCurrencies = new List<CryptoCurrency>();
     }
 
     public User()

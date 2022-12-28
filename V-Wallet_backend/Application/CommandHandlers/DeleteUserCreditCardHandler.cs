@@ -20,7 +20,10 @@ public class DeleteUserCreditCardHandler : IRequestHandler<DeleteUserCreditCard,
 
     public async Task<User> Handle(DeleteUserCreditCard request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.Users.Include(u => u.CreditCards).FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken: cancellationToken);
+        var user = await _userManager.Users
+            .Include(u => u.CreditCards)
+            .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken: cancellationToken);
+
         var cc = await _unitOfWork.CreditCardRepository.GetCreditCardById(request.CreditCardId);
 
         if (user == null || cc == null)

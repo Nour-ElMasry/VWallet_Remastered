@@ -12,7 +12,7 @@ public class CreditCard
     public long Deposit { get; set; }
     public long Cvv { get; set; }
 
-    public IList<Transaction> Transactions { get; set; }
+    public List<Transaction> Transactions { get; set; } = new();
 
     public CreditCard()
     {
@@ -20,7 +20,6 @@ public class CreditCard
         ExpirtationDate = CreditCardBuilder.GenerateExpirationDate();
         Cvv = CreditCardBuilder.GenerateCVV();
         Deposit = CreditCardBuilder.GenerateDeposit();
-        Transactions = new List<Transaction>();
     }
 
     public override string ToString()
