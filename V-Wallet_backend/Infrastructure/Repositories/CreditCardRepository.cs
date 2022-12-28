@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-internal class CreditCardRepository : ICreditCardRepository
+public class CreditCardRepository : ICreditCardRepository
 {
     private readonly DataContext _context;
 

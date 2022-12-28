@@ -21,10 +21,5 @@ public class CreditCard
         Cvv = CreditCardBuilder.GenerateCVV();
         Deposit = CreditCardBuilder.GenerateDeposit();
     }
-
-    public override string ToString()
-    {
-        return $"IBAN: {Iban}, \n Exp: {ExpirtationDate.Date}, \n CVV: {Cvv}, \n Deposit: {Deposit}";
-    }
 }
 
