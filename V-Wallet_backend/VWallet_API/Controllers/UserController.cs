@@ -9,7 +9,7 @@ using VWallet_API.Dtos.UserDtos;
 
 namespace VWallet_API.Controllers;
 
-[Route("api/v1/User")]
+[Route("api/v1/Users")]
 [ApiController]
 public class UserController : ControllerBase
 {

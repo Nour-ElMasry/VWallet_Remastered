@@ -1,4 +1,5 @@
-﻿using Application.Queries;
+﻿using Application.Commands;
+using Application.Queries;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -76,7 +77,10 @@ public class CreditCardController : ControllerBase
     {
         _logger.LogInformation($"Preparing to get credit card with id {ccId} of user with id {id}...");
 
-        var result = await _mediator.Send(new GetCreditCard { UserId = id });
+        var result = await _mediator.Send(new GetCreditCardById { 
+            UserId = id,
+            CreditCardId = ccId
+        });
 
         if (result == null)
         {
@@ -84,10 +88,31 @@ public class CreditCardController : ControllerBase
             return NotFound();
         }
 
-        var mappedResult = _mapper.Map<List<CreditCardInfoGetDto>>(result);
+        var mappedResult = _mapper.Map<CreditCardGetDto>(result);
 
         _logger.LogInformation("All users received successfully!!!");
 
         return Ok(mappedResult);
+    }
+
+    [HttpDelete]
+    [Route("CreditCards/{ccId}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> DeleteCreditCard(long ccId)
+    {
+        _logger.LogInformation($"Preparing to delete CreditCard with id {ccId}...");
+
+        var command = new DeleteCreditCard { CreditCardId = ccId };
+        var result = await _mediator.Send(command);
+
+        if (result == null)
+        {
+            _logger.LogError($"CreditCard with id {ccId} not found!!!");
+            return NotFound();
+        }
+
+        _logger.LogInformation($"CreditCard with id {ccId} deleted successfully!!!");
+
+        return NoContent();
     }
 }
