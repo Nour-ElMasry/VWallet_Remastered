@@ -1,0 +1,99 @@
+.cardsSection{
+    flex-direction: column;
+    margin-top: 10rem;
+    
+    .transferMoney__active{
+        z-index: 999;
+    }
+
+    .cardsList{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+        .card{
+            border-radius: 0.25rem;   
+            background-color: $purple; 
+            box-shadow: 7px 5px 10px -2px rgba(0,0,0,0.6);
+            &__info{
+                color: $white;
+                padding: 1rem;
+                font-family: 'Ubuntu Mono', monospace;
+                p{
+                    span{
+                        font-size: $font-sm;
+                        opacity: 0.8;
+                    }
+                }
+            }
+            &__options{
+                button{
+                    font-weight: bold;
+                    background-color: transparent;
+                    border-top: 1px solid black;
+                    border-radius: 0;
+                    &:not(:last-child){
+                        border-right: 1px solid black;
+                    }
+                }
+            }
+        }
+    }
+    .addCC{
+        position: absolute;
+        bottom: 7%;
+        right: 17%;
+        height: 3rem;
+        border-radius: 10px;
+        box-shadow: 5px 4px 10px -2px rgba(0,0,0,0.6);
+        background-color: $purple;
+        padding: 0.5rem 1rem;
+        
+        #addText{
+            color: white;
+            font-size: $font-md;
+            margin-left: 10px;
+            position: absolute;
+            right: 0.75rem;
+            width: max-content;
+            transition: all ease-in-out 150ms;
+        }
+        
+        
+        div{
+            margin-right: 8rem;
+            transition: margin-right ease-in-out 300ms;
+            .plusLine{
+                display: block;
+                width: 20px;
+                height: 2px;
+                border-radius: 5px;
+                background-color: white;
+                transition: all ease-in-out 300ms;
+                &:nth-child(1){
+                        position: absolute;
+                        transform: rotate(90deg);
+                }
+            }
+        }
+
+        &__active{
+            z-index: 999;
+            #addText{
+                opacity: 0;
+                visibility: hidden;
+            }
+            > div {
+                margin-right: 0rem;
+                .plusLine{
+                    &:nth-child(1){
+                        transform: rotate(45deg);
+                    }
+                    &:nth-child(2){
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+        }
+        
+    }
+}

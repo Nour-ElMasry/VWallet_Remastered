@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    font-family: 'Work Sans', sans-serif;
+    font-size: $font-md;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 80rem;
+    margin: 0 auto;
+    &--pa {
+        padding: 4.375rem 1.5rem;
+    }
+    &--py {
+        padding-top: 4.375rem;
+        padding-bottom: 4.375rem;
+    }
+    &--px {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+.flex {
+    display: flex;
+    &-jc-sb {
+        justify-content: space-between;
+    }
+    &-jc-c {
+        justify-content: center;
+    }
+    &-ai-c {
+        align-items: center;
+    }
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 0px;
+    font-weight: 300;
+}
+
+h2 {
+    font-size: 1.875rem;
+}
+
+a {
+    font-size: $font-sm;
+    text-decoration: none;
+}
+
+button,
+.button {
+    cursor: pointer;
+    background-color: $purple;
+    padding: 0.875rem 2.1875rem;
+    border: 0px;
+    border-radius: 3.125rem;
+    font-size: $font-sm;
+    color: $white;
+    &:hover {
+        opacity: 0.85;
+    }
+}
+
+p{
+    margin-bottom: 0;
+}
+.loader {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: black;
+    position: relative;
+    animation: load3 1.4s infinite linear;
+    transform: translateZ(0);
+  }
+
+  .loader:before {
+    width: 50%;
+    height: 50%;
+    background: #ffffff;
+    border-radius: 100% 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+  }
+  .loader:after {
+    background: $purple;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  @-webkit-keyframes load3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+.emptyCards{
+    padding: 0.5rem 0.75rem;
+    background-color: #710c04;
+    color: $white;
+    border: 2px dashed $white;
+    border-radius: 5px;
+    display: inline;
+}
+
+.spinner{
+    position: absolute;
+    left: 49%;
+    top: 30%;
+    transform: trans(-49%, -30%);
+}
+
+
+.table{
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24);
+    background-color: $white;
+
+    .table__thead{
+      background-color: $purple;
+      color: $white;
+    }
+
+    .table__td, .table__th{
+      padding: 1rem;
+      box-sizing: border-box;
+      text-align: center;
+    }
+  
+    .table__tr:hover{
+      background-color: #f0f0f0;
+    }
+
+    .table__td:first-child, .table__th:first-child{
+      width: 30%;
+      text-align: left;
+    }
+}
+
+#infoAddCard, #transferMoney, #cryptoInvestment{
+  border-radius: 0.25rem;   
+  background-color: $white; 
+  box-shadow: 7px 5px 10px -2px rgba(0,0,0,0.6);
+  padding: 1rem;
+  position: absolute;
+  top: 15rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  gap: 3rem;
+  z-index: 999;
+  &.fade-in{
+      animation-delay: 125ms;
+  }
+  .fields{
+      .form-field {
+          display: block;
+          width: 100%;
+          padding: 8px 16px;
+          line-height: 25px;
+          font-size: 14px;
+          font-weight: 500;
+          font-family: inherit;
+          border-radius: 6px;
+          color: #99A3BA;
+          border: 1px solid #CDD9ED;
+          background: #fff;
+          transition: border .3s ease;
+          &::placeholder {
+              color: #CBD1DC;
+          }
+          &:focus {
+              outline: none;
+              border-color: $purple;
+          }
+      }
+
+      .form-group {
+          position: relative;
+          display: flex;
+          width: 100%;
+          &:not(:last-child){
+              margin-bottom: 0.5rem;
+          }
+          & > span,
+          .form-field {
+              white-space: nowrap;
+              display: block;
+              &:not(:first-child):not(:last-child) {
+                  border-radius: 0;
+              }
+              &:first-child {
+                  border-radius: 6px 0 0 6px;
+              }
+              &:last-child {
+                  border-radius: 0 6px 6px 0;
+              }
+              &:not(:first-child) {
+                  margin-left: -1px;
+              }
+          }
+          .form-field {
+              position: relative;
+              z-index: 1;
+              flex: 1 1 auto;
+              width: 1%;
+              margin-top: 0;
+              margin-bottom: 0;
+          }
+          & > span {
+              text-align: center;
+              padding: 8px 12px;
+              font-size: 14px;
+              line-height: 25px;
+              color: #99A3BA;
+              background-color: #EEF4FF;
+              border: 1px solid #CDD9ED;
+              transition: all .3s ease;
+          }
+          &:focus-within {
+              & > span {
+                  color: $white;
+                  background-color: $purple;
+                  border-color: $purple;
+              }
+          }
+      }
+
+      .cc{
+          border-radius: 6px;
+          width: 100%;
+          margin-top: 1rem;
+      }
+  }
+  .walletPic{
+      padding-left: 2rem;
+      border-left: 1px solid $purple;
+      img{
+          width: 275px;
+          height: 225px;
+      }
+  }
+  .transPic{
+      padding-left: 2rem;
+      border-left: 1px solid $purple;
+      img{
+          width: 175px;
+          height: 175px;
+      } 
+  }
+}
+
+.has-fade, .has-addfade, .has-transfade, .has-invfade{
+  visibility: hidden;
+  opacity: 0;
+}
+.fade-in {
+  animation: fade-in 300ms ease-in-out forwards;
+}
+.fade-out {
+  animation: fade-out 300ms ease-in-out forwards;
+}
+
+#overlay {
+  position: absolute;
+  top: 4.9375rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient($purple, transparent);
+  z-index: 999;
+}
+
+  

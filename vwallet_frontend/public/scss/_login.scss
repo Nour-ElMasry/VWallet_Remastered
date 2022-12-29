@@ -1,0 +1,25 @@
+.login{
+    flex-direction: column;
+    height: 80vh;
+    
+    .login-container{
+        padding: 3rem 2rem;
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 0.5rem;
+        width: 21rem;
+        h1 {
+            margin-bottom: 2rem;
+        }
+        div {
+            flex-direction: column;
+            row-gap: 2rem;
+            input{
+                height: 2rem;
+                padding: 0px 5px;
+                background-color: $lighterGrayishCyan;
+                border: 1px solid black;
+            }
+        }
+    }
+}
