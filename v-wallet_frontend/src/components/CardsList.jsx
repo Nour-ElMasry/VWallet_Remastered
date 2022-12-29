@@ -9,7 +9,7 @@ const CardsList = () => {
     const [refreshKey, setRefreshKey] = useState(0);
     
     const iban = document.querySelector('[name="iban"]')
-    const depo = document.querySelector('[name="depo"]')
+    const cvv = document.querySelector('[name="cvv"]')
     const exp = document.querySelector('[name="exp"]')
     var errFlag = false;
 
@@ -35,7 +35,7 @@ const CardsList = () => {
         }else{
             plus.classList.add("addCC__active");
             clearField(iban)
-            clearField(depo)
+            clearField(cvv)
             clearField(exp)
             hasFade.forEach(x =>{
                 x.classList.add("fade-in");
@@ -54,11 +54,11 @@ const CardsList = () => {
 
     const errorCheck = () => {
         patternError(iban)
-        patternError(depo)
+        patternError(cvv)
         patternError(exp)
         
         if((iban.validity.patternMismatch || iban.value==="")||
-        (depo.validity.patternMismatch || depo.value==="") ||
+        (cvv.validity.patternMismatch || cvv.value==="") ||
         (exp.validity.patternMismatch || exp.value==="")){
             errFlag = true;
         }else{
@@ -72,7 +72,7 @@ const CardsList = () => {
     
     const addCard = () => {
         errorCheck()
-        if(errFlag == false){
+        if(errFlag === false){
             const [day, month, year] = exp.value.split('-');
             const date1 = new Date([year, month, day].join('-'));
             const date2 = new Date();
@@ -82,13 +82,13 @@ const CardsList = () => {
                     "http://localhost:8080/api/v1/1/creditCards",
                     {
                         iban: iban.value,
-                        deposit: depo.value,
+                        cvv: cvv.value,
                         expiration: exp.value
                     }
                 ).then(res =>{
                     setRefreshKey(oldKey => oldKey + 1)
                     clearField(iban)
-                    clearField(depo)
+                    clearField(cvv)
                     clearField(exp)
                 })
             }else{
@@ -110,7 +110,7 @@ const CardsList = () => {
     }
 
     const cardsDisplay = () => {
-        if(c.cards.length == 0){
+        if(c.cards.length === 0){
             return (
                 <p className="emptyCards">There are no credit cards in your account yet!</p>
             )
@@ -143,15 +143,15 @@ const CardsList = () => {
                 <div className="fields">
                     <div className="form-group">
                         <span>IBAN</span>
-                        <input pattern="[A-Za-z]{2}\d{12}" autoComplete="off" className="form-field" type="text" placeholder="ex: ROxxxxxxxxxxxxxx" name="iban"/>
-                    </div>
-                    <div className="form-group">
-                        <span>Deposit</span>
-                        <input pattern="\d+" className="form-field" autoComplete="off" type="text" placeholder="ex: 20000" name="depo"/>
+                        <input pattern="[A-Za-z]{2}\d{12}" autoComplete="off" className="form-field" type="text" placeholder="ROxxxxxxxxxxxxxx" name="iban"/>
                     </div>
                     <div className="form-group">
                         <span>Expiration</span>
-                        <input pattern="\d{2}[-]\d{2}[-]\d{4}" autoComplete="off" className="form-field" type="text" placeholder="ex: 12-12-2012" name="exp"/>
+                        <input pattern="\d{2}[-]\d{2}[-]\d{4}" autoComplete="off" className="form-field" type="text" placeholder="12-12-2012" name="exp"/>
+                    </div>
+                    <div className="form-group">
+                        <span>CVV</span>
+                        <input pattern="\d{3}" className="form-field" autoComplete="off" type="text" placeholder="XXX" name="cvv"/>
                     </div>
                     <button className="cc" type="submit" onClick={() => {addCard()}}>Add Credit Card</button>
                 </div>

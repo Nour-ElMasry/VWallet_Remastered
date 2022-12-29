@@ -1,12 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 
 const Card = (props) => {
-    const [loaded, setLoaded] = useState(false)
-    useEffect(()=>{
-        setLoaded(true) 
-    }, [])
 
     const transfer = document.getElementById("transferMoney");
     const hasFade = [document.querySelector(".has-fade"), document.querySelector(".has-transfade")];
@@ -24,12 +20,12 @@ const Card = (props) => {
             x.classList.remove("fade-out");
         })
         senderId.value = props.id
-        props.cards.filter(x => x.id != props.id).map((c) =>{
+        props.cards.filter(x => x.id !== props.id).array.forEach((c) => {
             let opt = document.createElement("option")
             opt.textContent = c.iban
             opt.value = c.id
             ibanTrans.appendChild(opt)
-        })
+        });
     }
 
     const closeTrans = () => { 

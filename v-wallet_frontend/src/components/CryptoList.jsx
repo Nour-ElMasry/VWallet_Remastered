@@ -69,13 +69,13 @@ const CryptoList = () => {
                     cryptos.sort((c1, c2) => c2.investment - c1.investment).map((c, i) => {
                         return ( <tr className="table__tr" key={i}>
                             <td className="table__td">{c.name}</td>
-                            <td className="table__td">{defaultCryptos.filter(cr => cr.name == c.name)[0].worthUSD.toLocaleString('en-US')+"$"}</td>
-                            <td className="table__td">{(parseFloat(c.investment)/(defaultCryptos.filter(cr => cr.name == c.name)[0].worthUSD)).toLocaleString('en-US', {maximumFractionDigits: 3})}</td>
+                            <td className="table__td">{defaultCryptos.filter(cr => cr.name === c.name)[0].worthUSD.toLocaleString('en-US')+"$"}</td>
+                            <td className="table__td">{(parseFloat(c.investment)/(defaultCryptos.filter(cr => cr.name === c.name)[0].worthUSD)).toLocaleString('en-US', {maximumFractionDigits: 3})}</td>
                             <td className="table__td">{parseFloat(c.value).toLocaleString('en-US')+"$"}</td>
                             <td className="table__td">{parseFloat(c.investment).toLocaleString('en-US')+"$"}</td>
                             <td className="table__td">
                                 <button className="cashOut" onClick={() => {
-                                        GeneralAxoisService.removeCard("http://localhost:8080/api/v1/1/cryptoCurrencies/" + c.id + "/" + (defaultCryptos.filter(cr => cr.name == c.name)[0].worthUSD) * (parseFloat(c.investment)/parseFloat(c.value)))
+                                        GeneralAxoisService.removeCard("http://localhost:8080/api/v1/1/cryptoCurrencies/" + c.id + "/" + (defaultCryptos.filter(cr => cr.name === c.name)[0].worthUSD) * (parseFloat(c.investment)/parseFloat(c.value)))
                                         .then(res => setRefreshKey(oldKey => oldKey + 1))
                                     }
                                 }><FontAwesomeIcon icon={faMoneyBill1} style={{marginRight:"5px"}}/>Cash out</button>
@@ -93,7 +93,7 @@ const CryptoList = () => {
             <div className="CryptoInv">
                 <h2>Crypto Investments: </h2>
                 {loader ? <><hr/><Spinner animation="border" className="spinner loader"/></> : 
-                    (cryptos.length == 0) ? <><hr/><p className="emptyCards">There are no crypto Investments on your account yet!</p></>: showTable()}
+                    (cryptos.length === 0) ? <><hr/><p className="emptyCards">There are no crypto Investments on your account yet!</p></>: showTable()}
             </div>
             <div className="allCrypto">
                 <h2>Crypto Currencies: </h2>

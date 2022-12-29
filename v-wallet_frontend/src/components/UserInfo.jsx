@@ -22,7 +22,7 @@ const UserInfo = (props) => {
 
     if(loaded){
         props.user.cryptoCurrencies.forEach(c => {
-            totalDeposit += ((defCryptos.filter(cr => cr.name == c.name)[0].worthUSD) * (parseFloat(c.investment)/parseFloat(c.value)));
+            totalDeposit += ((defCryptos.filter(cr => cr.name === c.name)[0].worthUSD) * (parseFloat(c.investment)/parseFloat(c.value)));
         });
     }
     

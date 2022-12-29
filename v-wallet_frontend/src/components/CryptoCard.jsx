@@ -1,14 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUp } from '@fortawesome/free-regular-svg-icons';
 
 const CryptoCard = (props) => {
-    const [loaded, setLoaded] = useState(false)
-    useEffect(()=>{
-        setLoaded(true) 
-    }, [])
-
-
     const cryptoInvestment = document.getElementById("cryptoInvestment");
     const moneyInv = document.querySelector('[name="moneyInv"]')
     const marketValue = document.querySelector('[name="marketValue"]')
