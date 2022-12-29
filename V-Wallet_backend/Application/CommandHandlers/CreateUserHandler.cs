@@ -40,7 +40,7 @@ public class CreateUserHandler : IRequestHandler<CreateUser, object>
 
             if (create.Succeeded)
             {
-                var dbUser = await _userManager.Users.Include(u => u.UserAddress).FirstOrDefaultAsync(u => u.UserName == user.UserName, cancellationToken: cancellationToken);
+                var dbUser = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == user.UserName, cancellationToken: cancellationToken);
 
                 var role = "Customer";
                 var roleCheck = await _roleManager.FindByNameAsync(role);
@@ -73,7 +73,7 @@ public class CreateUserHandler : IRequestHandler<CreateUser, object>
                         issuer: _configuration["Jwt:Issuer"],
                         audience: _configuration["Jwt:Audience"],
                         claims: authClaims,
-                        expires: DateTime.Now.AddHours(3),
+                        expires: DateTime.Now.AddDays(2),
                         signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                     );
 

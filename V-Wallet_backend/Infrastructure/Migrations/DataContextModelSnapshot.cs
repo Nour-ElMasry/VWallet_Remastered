@@ -41,7 +41,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("AddressId");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("Domain.CreditCard", b =>
@@ -71,7 +71,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CreditCards");
+                    b.ToTable("CreditCards", (string)null);
                 });
 
             modelBuilder.Entity("Domain.CryptoCurrency", b =>
@@ -101,7 +101,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CryptoCurrencies");
+                    b.ToTable("CryptoCurrencies", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Transaction", b =>
@@ -125,7 +125,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("CCId");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transactions", (string)null);
                 });
 
             modelBuilder.Entity("Domain.User", b =>
