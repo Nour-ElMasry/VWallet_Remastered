@@ -9,6 +9,6 @@ public interface ICreditCardRepository
     Task DeleteCreditCard(CreditCard u);
     Task<CreditCard> GetCreditCardById(long id);
     Task<CreditCard> GetCreditCardByIban(string iban);
-    Task<CreditCard> GetCreditCard(string iban, DateOnly date, long cvv);
+    Task<CreditCard> GetCreditCard(string iban, DateTime date, long cvv);
     Task<List<CreditCard>> GetAllCreditCards();
 }

@@ -4,8 +4,10 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using VWallet_API.Dtos.CreditCardDtos;
 using VWallet_API.Dtos.TransactionDtos;
+using VWallet_API.Dtos.UserDtos;
 
 namespace VWallet_API.Controllers;
 
@@ -48,7 +50,7 @@ public class CreditCardController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/CreditCards/CheckIban/{iban}")]
+    [Route("CreditCards/CheckIban/{iban}")]
     public async Task<IActionResult> CheckIbanExistance(string iban)
     {
         _logger.LogInformation($"Preparing to check if IBAN:{iban} exists...");
@@ -117,6 +119,60 @@ public class CreditCardController : ControllerBase
         return Ok(mappedResult);
     }
 
+    [HttpGet]
+    [Route("{id}/CreditCards/{ccId}/Transactions")]
+    [Authorize]
+    public async Task<IActionResult> GetCreditCardTransactionsById(string id, long ccId)
+    {
+        _logger.LogInformation($"Preparing to get transactions of credit card with id {ccId} of user with id {id}...");
+
+        var result = await _mediator.Send(new GetCreditCardTransactionsById
+        {
+            UserId = id,
+            CreditCardId = ccId
+        });
+
+        if (result == null)
+        {
+            _logger.LogError("Couldn't get transactions!!!");
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<List<TransactionGetDto>>(result);
+
+        _logger.LogInformation($"Transactions received successfully!!!");
+
+        return Ok(mappedResult);
+    }
+
+    [HttpPost]
+    [Route("{id}/CreditCards")]
+    [Authorize]
+    public async Task<IActionResult> AddCreditCard(string id, [FromBody] CreditCardPostDto cc)
+    {
+        _logger.LogInformation($"Preparing to add credit card to user with id {id}...");
+
+        var result = await _mediator.Send(new AddCreditCardToUser
+        {
+            UserId = id,
+            Iban = cc.Iban,
+            ExpirtationDate = DateTime.Parse(cc.ExpirtationDate),
+            Cvv = cc.Cvv,
+        });
+
+        if (result == null)
+        {
+            _logger.LogError("Couldn't add credit card!!!");
+            return NotFound();
+        }
+
+        var mappedResult = _mapper.Map<UserGetDto>(result);
+
+        _logger.LogInformation("Credit card added successfully!!!");
+
+        return Ok(mappedResult);
+    }
+
     [HttpPost]
     [Route("CreditCards/Transaction")]
     [Authorize]
@@ -167,7 +223,7 @@ public class CreditCardController : ControllerBase
 
     [HttpDelete]
     [Route("{Id}/CreditCards/{ccId}")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public async Task<IActionResult> DeleteUserCreditCard(string id, long ccId)
     {
         _logger.LogInformation($"Preparing to delete CreditCard with id {ccId} of User with id {id}...");

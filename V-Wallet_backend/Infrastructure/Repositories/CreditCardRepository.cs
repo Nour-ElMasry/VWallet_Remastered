@@ -28,7 +28,7 @@ public class CreditCardRepository : ICreditCardRepository
         return await _context.CreditCards.ToListAsync();
     }
 
-    public async Task<CreditCard> GetCreditCard(string iban, DateOnly date, long cvv)
+    public async Task<CreditCard> GetCreditCard(string iban, DateTime date, long cvv)
     {
         return await _context.CreditCards
             .SingleOrDefaultAsync(cc => cc.Iban == iban

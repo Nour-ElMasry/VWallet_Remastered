@@ -22,17 +22,20 @@ public class CreateTransactionHandler : IRequestHandler<CreateTransaction, Trans
         if (sendingCC == null || receivingCC == null)
             return null;
 
+        if (sendingCC == receivingCC)
+            return null; 
+
         if (sendingCC.Deposit <= request.Amount)
             throw new ArgumentException("Insufficient Funds");
 
         sendingCC.Deposit -= request.Amount;
         receivingCC.Deposit += request.Amount;
 
-        var tranSend = new Transaction(request.Amount, sendingCC);
+        var tranSend = new Transaction(-request.Amount, sendingCC);
         
         sendingCC.Transactions.Add(tranSend);
 
-        var tranReceive = new Transaction(-request.Amount, receivingCC);
+        var tranReceive = new Transaction(request.Amount, receivingCC);
 
         receivingCC.Transactions.Add(tranReceive);
 
