@@ -49,7 +49,7 @@ public class LogInUserHandler : IRequestHandler<LoginUser, Object>
                     issuer: _configuration["Jwt:Issuer"],
                     audience: _configuration["Jwt:Audience"],
                     claims: authClaims,
-                    expires: DateTime.Now.AddHours(3),
+                    expires: DateTime.Now.AddDays(3),
                     signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
 

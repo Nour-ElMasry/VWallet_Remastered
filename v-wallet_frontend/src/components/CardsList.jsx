@@ -98,7 +98,6 @@ const CardsList = () => {
     }
 
     const transferMoney = (sender, receiver, amount) => {
-        console.log(amount)
         GeneralAxoisService.postMethod("/CreditCards/Transaction", {
                 sendingCCIban: sender,     
                 receivingCCIban: receiver, 

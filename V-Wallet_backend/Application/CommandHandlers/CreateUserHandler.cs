@@ -73,7 +73,7 @@ public class CreateUserHandler : IRequestHandler<CreateUser, object>
                         issuer: _configuration["Jwt:Issuer"],
                         audience: _configuration["Jwt:Audience"],
                         claims: authClaims,
-                        expires: DateTime.Now.AddDays(2),
+                        expires: DateTime.Now.AddDays(3),
                         signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                     );
 

@@ -4,6 +4,7 @@ import { faFile, faTrashCan, faWindowClose } from '@fortawesome/free-regular-svg
 import GeneralAxoisService from "../services/GeneralAxoisService";
 import Dialog from '@mui/material/Dialog';
 import CardTransactions from "./CardTransactions";
+import RemoveCreditCardDialog from "../RemoveCreditCardDialog";
 
 const Card = (props) => {
     const [open, setOpen] = React.useState(false);
@@ -14,6 +15,16 @@ const Card = (props) => {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const [removeCardDialog, setRemoveCardDialog,] = React.useState(false);
+
+    const handleRemoveCardOpen = () => {
+        setRemoveCardDialog(true);
+    };
+
+    const handleRemoveCardClose = () => {
+        setRemoveCardDialog(false);
     };
 
     const date = new Date(Date.parse(props.exp));
@@ -97,7 +108,11 @@ const Card = (props) => {
                 }}>+ New Transfer</button>
             </div>
             <div className="flex flex-ai-c">
-                <button id="removeCard" onClick={() => removeCard(props.id)}><FontAwesomeIcon icon={faTrashCan} style={{marginRight:"5px"}}/> Remove</button>
+                <RemoveCreditCardDialog open={removeCardDialog} handleClose={handleRemoveCardClose} handleRemove={() => {
+                    handleRemoveCardClose()
+                    removeCard(props.id)
+                }} />
+                <button id="removeCard" onClick={handleRemoveCardOpen}><FontAwesomeIcon icon={faTrashCan} style={{marginRight:"5px"}}/> Remove</button>
             </div>
         </div>
     </div>
@@ -130,7 +145,7 @@ const Card = (props) => {
             <p>IBAN: <span>{props.iban}</span></p>
             <div className="splitter flex flex-ai-c">
                 <p>FUNDS: <span>{parseFloat(props.amount).toLocaleString('en-US')}$</span></p>
-                <p>EXP: <span>{date.getMonth()}/{date.getFullYear()}</span></p>
+                <p>EXP: <span>{date.getMonth().length > 1 ? date.getMonth() : "0" + date.getMonth()}/{date.getFullYear()}</span></p>
             </div>
         </div>
         <div className="cardInfoDialog__Transactions">

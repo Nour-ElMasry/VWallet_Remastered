@@ -80,6 +80,24 @@ body {
     }
 }
 
+.NotFoundContainer{
+    font-size: 2rem;
+    height: 70vh;
+    flex-direction: column;
+    gap: 2rem;
+    div{
+        text-align: center;
+        p{
+            margin-top: 1rem;
+        }
+    }
+    button{
+        font-size: 1.125rem;
+        font-weight: bold;
+        padding: 0.5rem 2rem;
+    }
+}
+
 .LoginSection{
     .container--pa{
         padding-bottom: 2.5rem;
@@ -182,6 +200,14 @@ p{
     }
   }
   
+
+.transactionsContainer{
+    margin-bottom: 1rem;
+    .transactionsTable{
+        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+    }
+}
+
 .emptyCards{
     padding: 0.5rem 0.75rem;
     background-color: #710c04;
@@ -197,7 +223,6 @@ p{
     top: 30%;
     transform: trans(-49%, -30%);
 }
-
 
 .table{
     width: 100%;

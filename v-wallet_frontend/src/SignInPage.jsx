@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Alert from '@mui/material/Alert';
 import decodeJwt from 'jwt-decode';
 import GeneralAxoisService from './services/GeneralAxoisService';
@@ -18,6 +18,20 @@ export default function LogIn() {
     const [wrongCredentials, setWrongCredentials] = useState(false);
     const [successfulLogIn, setSuccessfulLogIn] = useState(false);
     const navigate = useNavigate();
+    const token = JSON.parse(localStorage.getItem("User"));
+
+    useEffect(() => {
+      if (token) {
+        const expirationDate = new Date(token.expiration);
+        if(expirationDate > new Date()){
+          if(decodeJwt(token.token)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Admin"){
+            navigate("/users");
+          }else{
+            navigate("/creditCards");
+          }
+        }
+      }
+    }, [navigate, token])
 
     const handleCredentialsSubmit = (data) => {
       var credentials = {

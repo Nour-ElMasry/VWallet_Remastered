@@ -18,7 +18,7 @@ public class GetUserByIdHandler : IRequestHandler<GetUserById, User>
     public async Task<User> Handle(GetUserById request, CancellationToken cancellationToken)
     {
         var user = await _userManager.Users
-            .Include(u => u.CryptoCurrencies)
+            .Include(u => u.UserAddress)
             .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken: cancellationToken);
 
         if (user == null)

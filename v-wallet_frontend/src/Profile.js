@@ -4,29 +4,26 @@ import UserInfo from "./components/UserInfo";
 import {Spinner} from "react-bootstrap"
 
 const Profile = () => {
+    const [token] = useState(JSON.parse(localStorage.getItem("User")));
+
     const [user, setUser] = useState({
         id: 0,
         name:"",
-        email:"",
+        username:"",
         phone: "",
         dateOfBirth: "",
         address: {},
-        creditCards: [],
-        cryptoCurrencies: []
     });
     const [loader, setLoader] = React.useState(true);
 
     useEffect(() => {
-        GeneralAxoisService.getMethod("http://localhost:8080/api/v1/1/profile").then((res) => {
+        GeneralAxoisService.getMethod("/" + token.customer.id).then((res) => {
             setUser({
                 id: res.data.id,
+                username: res.data.username,
                 name: res.data.name,
-                email: res.data.email,
-                phone: res.data.phone,
                 dateOfBirth: res.data.dateOfBirth,
-                address: res.data.address,
-                creditCards: res.data.creditCards,
-                cryptoCurrencies: res.data.cryptoCurrencies
+                address: res.data.userAddress,
             });
             setLoader(false);
         });
