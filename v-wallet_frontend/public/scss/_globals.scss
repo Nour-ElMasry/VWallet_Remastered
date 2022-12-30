@@ -28,6 +28,16 @@ body {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
+    &--styled{
+        background-color: $veryLightGray;
+        -webkit-box-shadow: 3px 3px 7px -1px rgba(0,0,0,0.83); 
+        box-shadow: 3px 3px 7px -1px rgba(0,0,0,0.83);
+    }
+    &--styledDarker{
+        background-color: $lightGrey;
+        -webkit-box-shadow: 3px 3px 7px -1px rgba(0,0,0,0.83); 
+        box-shadow: 3px 3px 7px -1px rgba(0,0,0,0.83);
+    }
 }
 
 .flex {
@@ -42,6 +52,48 @@ body {
         align-items: center;
     }
 }
+
+
+.PositionAboluteMiddle{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width:100%;
+    &--mb{
+        @include breakpoint-down(medium){
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width:100%;
+        }
+    }
+    &--dt{
+        @include breakpoint-up(medium){
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width:100%;
+        }
+    }
+}
+
+.LoginSection{
+    .container--pa{
+        padding-bottom: 2.5rem;
+    }
+    .formLink{
+        color: hsl(217, 64%, 49%);
+        text-decoration: underline;
+        font-size: $font-sm;
+        @include breakpoint-up(medium){
+            font-size: $font-md;
+        }
+    }
+}
+
 
 h1,
 h2,

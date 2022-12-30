@@ -11,7 +11,9 @@ const CryptoList = () => {
     const [cryptos, setCryptos] = useState([]);
     const [deposit, setDeposit] = useState(0); 
     const [refreshKey, setRefreshKey] = useState(0);
+    const [user] = useState(JSON.parse(localStorage.getItem("User")));
     
+
     useEffect(() => {
         getCurrencyValues()
     }, [])
@@ -22,14 +24,14 @@ const CryptoList = () => {
     }, [refreshKey])
 
     const getCryptos = () => {
-        GeneralAxoisService.getMethod("http://localhost:8080/api/v1/1/cryptoCurrencies")
+        GeneralAxoisService.getMethod("/" + user.customer.id + "/Crypto/All")
         .then(res => {
             setCryptos(res.data)
         })
     }
 
     const getTotalDeposit = () => {
-        GeneralAxoisService.getMethod("http://localhost:8080/api/v1/1/creditCards")
+        GeneralAxoisService.getMethod("/" + user.customer.id + "/CreditCards/All")
         .then(res => {
             var totalDeposit = 0;
             res.data.forEach(c => {
@@ -47,8 +49,7 @@ const CryptoList = () => {
     }
 
     const confirmInvest = (obj) => {
-        GeneralAxoisService.postMethod(
-            "http://localhost:8080/api/v1/1/cryptoCurrencies/", obj
+        GeneralAxoisService.postMethod("/" + user.customer.id + "/Crypto/Investment", obj
         ).then(res => setRefreshKey(oldKey => oldKey + 1))
     }
 

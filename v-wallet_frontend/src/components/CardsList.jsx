@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import Card from "./Card";
 import GeneralAxoisService from "../services/GeneralAxoisService";
 import {Spinner} from "react-bootstrap"
+import moment from "moment/moment";
 
 const CardsList = () => {
+    const [user] = useState(JSON.parse(localStorage.getItem("User")));
     const [c, setC] = useState({ cards: []});
     const [loader, setLoader] = React.useState(true);
     const [refreshKey, setRefreshKey] = useState(0);
@@ -18,9 +20,12 @@ const CardsList = () => {
     }, [refreshKey])
 
     const getData = async () => {
-        GeneralAxoisService.getMethod("http://localhost:8080/api/v1/1/creditCards").then((res) => {
+        GeneralAxoisService.getMethod("/" + user.customer.id + "/CreditCards/All").then((res) => {
             setC({cards: res.data})
             setLoader(false)
+        }).catch((err) => {
+            setLoader(false)
+            console.log(err)
         })
     }
     const activateAdd = () => {
@@ -71,41 +76,40 @@ const CardsList = () => {
     }
     
     const addCard = () => {
+        const [month, year] = exp.value.split('/');
+        const date = new Date(year, month-1);
+        const datetime = moment(date).format();
         errorCheck()
         if(errFlag === false){
-            const [day, month, year] = exp.value.split('-');
-            const date1 = new Date([year, month, day].join('-'));
-            const date2 = new Date();
-
-            if(date1 > date2){
-                GeneralAxoisService.postMethod(
-                    "http://localhost:8080/api/v1/1/creditCards",
+            GeneralAxoisService.postMethod(
+                "/" + user.customer.id + "/CreditCards",
                     {
                         iban: iban.value,
                         cvv: cvv.value,
-                        expiration: exp.value
+                        expirtationDate: datetime
                     }
-                ).then(res =>{
+            ).then(res =>{
                     setRefreshKey(oldKey => oldKey + 1)
                     clearField(iban)
                     clearField(cvv)
                     clearField(exp)
-                })
-            }else{
-                alert("Please enter a valid date!")
-            } 
+            })
         }
     }
 
-    const transferMoney = (id, sender, obj) => {
-        GeneralAxoisService.updateCard(
-            "http://localhost:8080/api/v1/1/creditCards/"+id+"/"+sender, obj
+    const transferMoney = (sender, receiver, amount) => {
+        console.log(amount)
+        GeneralAxoisService.postMethod("/CreditCards/Transaction", {
+                sendingCCIban: sender,     
+                receivingCCIban: receiver, 
+                amount: amount
+            }
         ).then(res => setRefreshKey(oldKey => oldKey + 1))
     }
 
     const removeCard = (id) => {
-        GeneralAxoisService.removeCard(
-            "http://localhost:8080/api/v1/1/creditCards/"+id
+        GeneralAxoisService.deleteMethod(
+            "/" + user.customer.id + "/CreditCards/" + id
         ).then(res => setRefreshKey(oldKey => oldKey + 1))
     }
 
@@ -121,10 +125,10 @@ const CardsList = () => {
                         return (
                             <Card 
                                 key={i}
-                                id={x.id}
+                                id={x.creditCardId}
                                 iban={x.iban} 
                                 amount={x.deposit}
-                                exp={x.expiration}
+                                exp={x.expirtationDate}
                                 cards={c.cards}
                                 moneyTrans={transferMoney}
                                 remove={removeCard}
@@ -143,11 +147,11 @@ const CardsList = () => {
                 <div className="fields">
                     <div className="form-group">
                         <span>IBAN</span>
-                        <input pattern="[A-Za-z]{2}\d{12}" autoComplete="off" className="form-field" type="text" placeholder="ROxxxxxxxxxxxxxx" name="iban"/>
+                        <input pattern="[A-Za-z]{2}\d{18}" autoComplete="off" className="form-field" type="text" placeholder="ROxxxxxxxxxxxxxxxxx" name="iban"/>
                     </div>
                     <div className="form-group">
                         <span>Expiration</span>
-                        <input pattern="\d{2}[-]\d{2}[-]\d{4}" autoComplete="off" className="form-field" type="text" placeholder="12-12-2012" name="exp"/>
+                        <input pattern="\d{2}[/]\d{4}" autoComplete="off" className="form-field" type="text" placeholder="12/2012" name="exp"/>
                     </div>
                     <div className="form-group">
                         <span>CVV</span>

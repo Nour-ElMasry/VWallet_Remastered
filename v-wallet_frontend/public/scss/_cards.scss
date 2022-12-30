@@ -5,7 +5,7 @@
     .transferMoney__active{
         z-index: 999;
     }
-
+    
     .cardsList{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -14,26 +14,40 @@
             border-radius: 0.25rem;   
             background-color: $purple; 
             box-shadow: 7px 5px 10px -2px rgba(0,0,0,0.6);
+            min-width: 21.5rem;
             &__info{
                 color: $white;
                 padding: 1rem;
                 font-family: 'Ubuntu Mono', monospace;
+                position: relative;
+                width: 100%;
                 p{
                     span{
                         font-size: $font-sm;
                         opacity: 0.8;
                     }
                 }
+                .info_button{
+                    cursor: pointer;
+                }
+                .cardAmount{
+                    color: hsl(120, 100%, 39%);
+                    font-size: 2.25rem;
+                    margin-top: .5rem;
+                }
             }
             &__options{
+                border-left: 1px solid black;
+                width: 110%;
+                div{
+                    &:not(:first-child){
+                        border-top: 1px solid black;
+                    }
+                }
                 button{
                     font-weight: bold;
                     background-color: transparent;
-                    border-top: 1px solid black;
                     border-radius: 0;
-                    &:not(:last-child){
-                        border-right: 1px solid black;
-                    }
                 }
             }
         }
@@ -95,5 +109,39 @@
             }
         }
         
+    }
+}
+
+.cardInfoDialog{
+    margin: 1rem 2rem;
+    min-width: 20rem;
+    &__Title{
+        margin-bottom: 1rem;
+    }
+    &__Info{
+        p{
+            font-size: 0.8125rem;
+            font-weight: bold;
+            span{
+                font-size: 1.25rem;
+                margin-left: 0.5rem;
+            }
+        }
+        .splitter{
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            p{
+                &:not(:last-child){
+                    margin-right: 3.5rem;
+                }
+            }
+        }
+    }
+
+    &__Transactions{
+        margin-top: 2rem;
+        hr{
+            margin: 1rem 0;
+        }
     }
 }
