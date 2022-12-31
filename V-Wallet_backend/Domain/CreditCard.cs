@@ -9,7 +9,7 @@ public class CreditCard
     public long CreditCardId { get; set; }
     public String Iban { get; set; }
     public DateTime ExpirtationDate { get; set; }
-    public long Deposit { get; set; }
+    public decimal Deposit { get; set; }
     public long Cvv { get; set; }
 
     public List<Transaction> Transactions { get; set; } = new();

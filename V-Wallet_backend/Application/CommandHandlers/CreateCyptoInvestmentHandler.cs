@@ -28,7 +28,7 @@ public class CreateCyptoInvestmentHandler : IRequestHandler<CreateCryptoInvestme
         if (user == null)
             return null;
 
-        long totalDeposit = 0;
+        decimal totalDeposit = 0;
         var creditCards = user.CreditCards.OrderByDescending(cc => cc.Deposit);
 
         foreach (var cc in creditCards)

@@ -97,9 +97,9 @@ public class CryptoController : ControllerBase
     }
 
     [HttpDelete]
-    [Route("{id}/Crypto/{ccId}/Cash-out/{value}")]
+    [Route("{id}/Crypto/{ccId}/Cash-out")]
     [Authorize]
-    public async Task<IActionResult> CashOutInvestment(string id, long ccId, long value)
+    public async Task<IActionResult> CashOutInvestment(string id, long ccId, [FromQuery] decimal value)
     {
         _logger.LogInformation($"Preparing to cash out investment...");
 

@@ -48,9 +48,21 @@ const CryptoList = () => {
         setLoader(false)
     }
 
-    const confirmInvest = (obj) => {
-        GeneralAxoisService.postMethod("/" + user.customer.id + "/Crypto/Investment", obj
-        ).then(res => setRefreshKey(oldKey => oldKey + 1))
+    const confirmInvest = (name, value, inv) => {
+        console.log(name.toString(), value, inv)
+            if(deposit > inv){
+                GeneralAxoisService.postMethod("/" + user.customer.id + "/Crypto/Investment", 
+                {
+                    Name: name.toString(),
+                    value: parseFloat(value),
+                    investment: parseFloat(inv),
+                }
+                ).then(res => setRefreshKey(oldKey => oldKey + 1))
+                .catch(err => console.error(err))
+    
+            }else{
+                alert("Insuficient funds!")
+            }   
     }
 
     const showTable = () =>{
@@ -76,8 +88,9 @@ const CryptoList = () => {
                             <td className="table__td">{parseFloat(c.investment).toLocaleString('en-US')+"$"}</td>
                             <td className="table__td">
                                 <button className="cashOut" onClick={() => {
-                                        GeneralAxoisService.removeCard("http://localhost:8080/api/v1/1/cryptoCurrencies/" + c.id + "/" + (defaultCryptos.filter(cr => cr.name === c.name)[0].worthUSD) * (parseFloat(c.investment)/parseFloat(c.value)))
+                                        GeneralAxoisService.deleteMethodWithParams("/" + user.customer.id + "/Crypto/" + c.cryptoId + "/Cash-out/" , {value: parseFloat(defaultCryptos.filter(cr => cr.name === c.name)[0].worthUSD)})
                                         .then(res => setRefreshKey(oldKey => oldKey + 1))
+                                        .catch(err => console.error(err))
                                     }
                                 }><FontAwesomeIcon icon={faMoneyBill1} style={{marginRight:"5px"}}/>Cash out</button>
                             </td>

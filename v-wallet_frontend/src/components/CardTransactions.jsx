@@ -13,6 +13,7 @@ const CardTransactions = (props) => {
     const [user] = useState(JSON.parse(localStorage.getItem("User")));
     const [rows, setRows] = useState([])
     const [loader, setLoader] = useState(false)
+
     useEffect(() => {
         GeneralAxoisService.getMethod("/" + user.customer.id + "/CreditCards/" + props.id + "/Transactions")
         .then((response) => {
@@ -53,6 +54,12 @@ const CardTransactions = (props) => {
         return hours + ":" + minutes
     }
 
+    const amountFormatter = (amount) => {
+      if(!amount.toString().includes("-"))
+        return "+" + amount
+      return amount
+    }
+
     return <div className="transactionsContainer">
         {(loader && rows.length === 0 ) && <p className="emptyCards">There are no Transactions on this credit card</p>}
         {(loader && rows.length > 0)  && <div className="transactionsTable"><TableContainer component={Paper}>
@@ -72,7 +79,7 @@ const CardTransactions = (props) => {
             sx={{ 'td, th': { border: 1 } }}
           >
             <TableCell sx={{ textAlign: 'center' }}  component="th" scope="row">
-              {row.amount}$
+              {amountFormatter(row.amount)}$
             </TableCell>
             <TableCell sx={{ textAlign: 'center' }}>{timeFormatter(row.dateOfTransaction)}</TableCell>
             <TableCell sx={{ textAlign: 'center' }}>{dateFormatter(row.dateOfTransaction)}</TableCell>

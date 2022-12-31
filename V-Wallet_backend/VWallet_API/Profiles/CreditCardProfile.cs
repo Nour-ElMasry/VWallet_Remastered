@@ -27,7 +27,7 @@ namespace VWallet_API
                     TransactionId = t.TransactionId,
                     DateOfTransaction = t.DateOfTransaction,
                     Amount = t.Amount,
-                    TransactionIssuer = t.CC.Iban
+                    TransactionIssuer = t.CCIban
                 }
             )));
         }

@@ -7,16 +7,14 @@ public class Transaction
 {
     [Key]
     public long TransactionId { get; set; }
-    public long Amount { get; set; }
+    public decimal Amount { get; set; }
     public DateTime DateOfTransaction { get; set; }
+    public String CCIban { get; set; }
 
-    [ForeignKey("CCId")]
-    public CreditCard CC { get; set; }
-
-    public Transaction(long amount, CreditCard cc)
+    public Transaction(long amount, string ccIban)
     {
         Amount = amount;
-        CC = cc;
+        CCIban = ccIban;
         DateOfTransaction = DateTime.UtcNow;
     }
 

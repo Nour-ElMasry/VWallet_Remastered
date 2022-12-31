@@ -27,11 +27,20 @@ const Card = (props) => {
         setRemoveCardDialog(false);
     };
 
-    const date = new Date(Date.parse(props.exp));
+    
     const ibanTrans = document.querySelector('[name="ibanTrans"]')
     const depoTrans = document.querySelector('[name="moneyAmount"]')
     const senderIban = document.querySelector('[name="senderIban"]')
     const overlay = document.getElementById("overlay")
+
+    const dateFormatter = (date) => {
+        const formattedDate = new Date(Date.parse(date));
+        var month = formattedDate.getMonth() + 1;
+        if(month.length === 1)
+            month = "0" + month
+        
+        return month + "/" + formattedDate.getFullYear()
+    }
 
     const transAddBtn = () => {
         const transfer = document.getElementById("transferMoney");
@@ -145,7 +154,7 @@ const Card = (props) => {
             <p>IBAN: <span>{props.iban}</span></p>
             <div className="splitter flex flex-ai-c">
                 <p>FUNDS: <span>{parseFloat(props.amount).toLocaleString('en-US')}$</span></p>
-                <p>EXP: <span>{date.getMonth().length > 1 ? date.getMonth() : "0" + date.getMonth()}/{date.getFullYear()}</span></p>
+                <p>EXP: <span>{dateFormatter(props.exp)}</span></p>
             </div>
         </div>
         <div className="cardInfoDialog__Transactions">

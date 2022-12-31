@@ -3,15 +3,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUp } from '@fortawesome/free-regular-svg-icons';
 
 const CryptoCard = (props) => {
-    const cryptoInvestment = document.getElementById("cryptoInvestment");
-    const moneyInv = document.querySelector('[name="moneyInv"]')
-    const marketValue = document.querySelector('[name="marketValue"]')
-    const invName = document.querySelector("#cryptoInvName")
-    const hasFade = [document.querySelector(".has-fade"), document.querySelector(".has-invfade")];
+   
     const overlay = document.getElementById("overlay")
     
+    const handleConfirmInv = () => {
+        const invName = document.querySelector("#cryptoInvName")
+        const moneyInv = document.querySelector('[name="moneyInv"]')
+        const marketValue = document.querySelector('[name="marketValue"]')
+
+        props.confirmInvest(invName.textContent, marketValue.value, moneyInv.value)
+    }
 
     const invBtn = () => {
+        const cryptoInvestment = document.getElementById("cryptoInvestment");
+        const hasFade = [document.querySelector(".has-fade"), document.querySelector(".has-invfade")];
+        const invName = document.querySelector("#cryptoInvName")
+        const marketValue = document.querySelector('[name="marketValue"]')
+
         cryptoInvestment.classList.add("cryptoInvestment__active");
         hasFade.forEach(x =>{
             x.classList.add("fade-in");
@@ -22,6 +30,10 @@ const CryptoCard = (props) => {
     }
 
     const closeInv= () => { 
+        const cryptoInvestment = document.getElementById("cryptoInvestment");
+        const hasFade = [document.querySelector(".has-fade"), document.querySelector(".has-invfade")];
+        const moneyInv = document.querySelector('[name="moneyInv"]')
+
         if(cryptoInvestment.classList.contains("cryptoInvestment__active")){
             cryptoInvestment.classList.remove("cryptoInvestment__active");
             hasFade.forEach(x =>{
@@ -60,17 +72,7 @@ const CryptoCard = (props) => {
                 <input pattern="\d+" autoComplete="off" className="form-field" type="text" placeholder="ex: 5000" name="moneyInv"/>
             </div>
             <input type="hidden" name="marketValue"></input>
-            <button className="cc" id="investMoney" onClick={() => {
-                if(parseFloat(props.totalDeposit) > parseFloat(moneyInv.value)){
-                    props.confirmInvest({
-                    name: invName.textContent,
-                    value: marketValue.value,
-                    investment: moneyInv.value
-                })
-                }else{
-                    alert("Insuficient funds!")
-                }   
-            }}>Invest Money</button>
+            <button className="cc" id="investMoney" onClick={handleConfirmInv}>Invest Money</button>
         </div>
     </div>
     </>

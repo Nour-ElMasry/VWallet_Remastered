@@ -23,13 +23,12 @@ const UserInfo = (props) => {
         }).catch((error) =>{
             console.log(error)
         });
-
-        setLoaded(true)
     }, [])
 
     const getCryptoValues = async() => {
         var tmp = await GeneralAxoisService.getDefaultCryptos()
         setDefCryptos(tmp)
+        setLoaded(true)
     }
 
     var totalDeposit = 0;

@@ -31,11 +31,11 @@ public class CreateTransactionHandler : IRequestHandler<CreateTransaction, Trans
         sendingCC.Deposit -= request.Amount;
         receivingCC.Deposit += request.Amount;
 
-        var tranSend = new Transaction(-request.Amount, sendingCC);
+        var tranSend = new Transaction(-request.Amount, receivingCC.Iban);
         
         sendingCC.Transactions.Add(tranSend);
 
-        var tranReceive = new Transaction(request.Amount, receivingCC);
+        var tranReceive = new Transaction(request.Amount, sendingCC.Iban);
 
         receivingCC.Transactions.Add(tranReceive);
 

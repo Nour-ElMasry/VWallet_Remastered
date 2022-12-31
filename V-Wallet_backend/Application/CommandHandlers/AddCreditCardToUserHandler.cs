@@ -26,6 +26,9 @@ public class AddCreditCardToUserHandler : IRequestHandler<AddCreditCardToUser, U
         if (creditCard == null || user == null)
             return null;
 
+        if (user.CreditCards.FirstOrDefault(cc => cc.CreditCardId == creditCard.CreditCardId) != null)
+            return null;
+
         user.CreditCards.Add(creditCard);
         await _unitOfWork.Save();
 

@@ -22,6 +22,10 @@ class GeneralAxoisService {
         return await axios.delete(baseUrl + url, { headers: { "Authorization" : "Bearer " + token }})
     }
 
+    async deleteMethodWithParams(url, params){
+        return await axios.delete(baseUrl + url, { params: params, headers: { "Authorization" : "Bearer " + token }})
+    }
+
     async getDefaultCryptos(){
         var btcWorth = 0
         var ethWorth = 0

@@ -8,10 +8,10 @@ public class CryptoCurrency
     [Key]
     public long CryptoId { get; set; }
     public string Name { get; set; }
-    public long Value { get; set; }
-    public long Investment { get; set; }
+    public decimal Value { get; set; }
+    public decimal Investment { get; set; }
     public DateTime DateOfInvestment { get; set; }
-    public CryptoCurrency(string name, long value, long investment)
+    public CryptoCurrency(string name, decimal value, decimal investment)
     {
         Name = name;
         Value = value;

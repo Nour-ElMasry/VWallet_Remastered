@@ -10,9 +10,7 @@ const CardsList = () => {
     const [loader, setLoader] = React.useState(true);
     const [refreshKey, setRefreshKey] = useState(0);
     
-    const iban = document.querySelector('[name="iban"]')
-    const cvv = document.querySelector('[name="cvv"]')
-    const exp = document.querySelector('[name="exp"]')
+    
     var errFlag = false;
 
     useEffect(() => {
@@ -29,6 +27,9 @@ const CardsList = () => {
         })
     }
     const activateAdd = () => {
+        const iban = document.querySelector('[name="iban"]')
+        const cvv = document.querySelector('[name="cvv"]')
+        const exp = document.querySelector('[name="exp"]')
         const plus = document.getElementById("addCC");
         const hasFade = [document.querySelector(".has-fade"), document.querySelector(".has-addfade")]
         if(plus.classList.contains("addCC__active")){
@@ -58,6 +59,9 @@ const CardsList = () => {
     };
 
     const errorCheck = () => {
+        const iban = document.querySelector('[name="iban"]')
+        const cvv = document.querySelector('[name="cvv"]')
+        const exp = document.querySelector('[name="exp"]')
         patternError(iban)
         patternError(cvv)
         patternError(exp)
@@ -76,6 +80,9 @@ const CardsList = () => {
     }
     
     const addCard = () => {
+        const iban = document.querySelector('[name="iban"]')
+        const cvv = document.querySelector('[name="cvv"]')
+        const exp = document.querySelector('[name="exp"]')
         const [month, year] = exp.value.split('/');
         const date = new Date(year, month-1);
         const datetime = moment(date).format();

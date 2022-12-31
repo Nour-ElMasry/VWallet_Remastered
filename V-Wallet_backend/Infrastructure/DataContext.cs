@@ -31,7 +31,20 @@ public class DataContext : IdentityDbContext<User>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Transaction>().HasOne(t => t.CC)
-                           .WithMany(cc => cc.Transactions).HasPrincipalKey(cc => cc.CreditCardId);
+        modelBuilder.Entity<CreditCard>()
+        .Property(p => p.Deposit)
+        .HasPrecision(18, 2);
+
+        modelBuilder.Entity<CryptoCurrency>()
+        .Property(p => p.Investment)
+        .HasPrecision(18, 2);
+
+        modelBuilder.Entity<CryptoCurrency>()
+        .Property(p => p.Value)
+        .HasPrecision(18, 2);
+
+        modelBuilder.Entity<Transaction>()
+       .Property(p => p.Amount)
+       .HasPrecision(18, 2);
     }
 }

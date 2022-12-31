@@ -3,6 +3,6 @@
 public class CryptoPostDto
 {
     public string Name { get; set; }
-    public long Value { get; set; } 
-    public long Investment { get; set; }
+    public decimal Value { get; set; } 
+    public decimal Investment { get; set; }
 }

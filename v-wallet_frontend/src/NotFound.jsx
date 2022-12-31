@@ -14,7 +14,7 @@ const NotFound = () => {
         <h1>404 - Page Not Found</h1>
         <p>We're sorry, but the page you requested was not found.</p>
       </div>
-      <Button variant="contained" onClick={handleOnClick}>Go Back</Button>
+      <Button variant="contained" sx={{backgroundColor: "hsl(270, 50%, 40%)"}} onClick={handleOnClick}>Go Back</Button>
     </div>
   );
 };

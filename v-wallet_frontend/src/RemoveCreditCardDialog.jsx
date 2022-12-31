@@ -23,10 +23,10 @@ export default function RemoveCreditCardDialog(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClose}>Cancel</Button>
-          <Button onClick={props.handleRemove}>
+          <Button variant='contained' onClick={props.handleRemove}>
             Confirm
           </Button>
+          <Button onClick={props.handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>

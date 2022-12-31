@@ -9,17 +9,16 @@ header{
             font-size: $font-lg;
             cursor: pointer;
         }
+        
         &__links {
+            gap: 1.5rem;
             a{
                 position: relative;
                 font-size: $font-md;
                 color: $white;
                 opacity: 0.7;
                 transition: opacity 300ms ease-in-out;
-                &:not(:last-child){
-                    margin-right: 1rem;
-                }
-    
+                
                 &:hover {
                     opacity: 1;
                 }
@@ -36,6 +35,10 @@ header{
                 left: 0px;
                 opacity: 0;
                 transition: opacity 300ms ease-in-out;
+            }
+
+            .logOut::before{
+                bottom: -25px;
             }
 
             a:hover::before {
