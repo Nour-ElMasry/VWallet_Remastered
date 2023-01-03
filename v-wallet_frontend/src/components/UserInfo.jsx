@@ -4,12 +4,10 @@ import GeneralAxoisService from "../services/GeneralAxoisService";
 const UserInfo = (props) => {
     const [user] = useState(JSON.parse(localStorage.getItem("User")));
     const [loaded, setLoaded] = useState(false)
-    const [defCryptos, setDefCryptos] = useState([])
     const [creditCards, setCreditCards] = useState([])
     const [cryptoCurrencies, setCryptoCurrencies] = useState([])
 
     useEffect(()=>{
-        getCryptoValues()
         GeneralAxoisService.getMethod("/" + user.customer.id + "/CreditCards/All")
         .then((response) => {
             setCreditCards(response.data)
@@ -23,22 +21,14 @@ const UserInfo = (props) => {
         }).catch((error) =>{
             console.log(error)
         });
+        setLoaded(true)
     }, [])
 
-    const getCryptoValues = async() => {
-        var tmp = await GeneralAxoisService.getDefaultCryptos()
-        setDefCryptos(tmp)
-        setLoaded(true)
-    }
-
     var totalDeposit = 0;
-    creditCards.forEach(c => {
-        totalDeposit += parseFloat(c.deposit);
-    });
-
+    
     if(loaded){
-        cryptoCurrencies.forEach(c => {
-            totalDeposit += ((defCryptos.filter(cr => cr.name === c.name)[0].worthUSD) * (parseFloat(c.investment)/parseFloat(c.value)));
+        creditCards.forEach(c => {
+            totalDeposit += parseFloat(c.deposit);
         });
     }
     

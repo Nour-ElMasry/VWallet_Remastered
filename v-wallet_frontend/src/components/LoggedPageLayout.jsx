@@ -2,7 +2,7 @@ import Header from "./Header";
 
 const LoggedPageLayout = (props) => {
     return <div>
-        <Header log={true} />
+        <Header log />
         {props.children}
     </div>;
 }

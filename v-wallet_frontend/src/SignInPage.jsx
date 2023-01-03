@@ -25,7 +25,7 @@ export default function LogIn() {
         const expirationDate = new Date(token.expiration);
         if(expirationDate > new Date()){
           if(decodeJwt(token.token)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Admin"){
-            navigate("/users");
+            navigate("/admin/users");
           }else{
             navigate("/creditCards");
           }
@@ -45,7 +45,7 @@ export default function LogIn() {
         setSuccessfulLogIn(true);
         setTimeout(() => {
           if(decodeJwt(res.data.token)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Admin"){
-            navigate("/users");
+            navigate("/admin/users");
           }else{
             navigate("/creditCards");
           }

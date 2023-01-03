@@ -9,7 +9,10 @@ import LogIn from "./SignInPage";
 import SignUp from "./SignUpPage";
 import NotFound from "./NotFound";
 import LoggedPageLayout from "./components/LoggedPageLayout";
-
+import AdminPageLayout from "./components/AdminPageLayout";
+import Users from "./components/Users";
+import AdminsCryptos from "./components/AdminCryptos";
+import AdminCreditCards from "./components/AdminCreditCards";
 
 const App = () => {
 
@@ -18,11 +21,11 @@ const App = () => {
         <Router>
         <Routes>
                 <Route path="/" element={<>
-                    <Header log={false}/>
+                    <Header />
                     <LogIn/>
                 </>}/>
                 <Route path="/signup" element={<>
-                    <Header log={false}/>
+                    <Header />
                     <SignUp/>
                 </>}/>
                 <Route path="/creditCards" element={<LoggedPageLayout>
@@ -34,8 +37,17 @@ const App = () => {
                 <Route path="/profile" element={<LoggedPageLayout>
                     <Profile />
                 </LoggedPageLayout>}/>
+                <Route path="admin/users" element={<AdminPageLayout>
+                    <Users />
+                </AdminPageLayout>}/>
+                <Route path="admin/creditCards" element={<AdminPageLayout>
+                    <AdminCreditCards />
+                </AdminPageLayout>}/>
+                <Route path="admin/crypto" element={<AdminPageLayout>
+                    <AdminsCryptos />
+                </AdminPageLayout>}/>
                 <Route path="*" element={<>
-                    <Header log={false}/>
+                    <Header />
                     <NotFound />
                 </>}/>
         </Routes>

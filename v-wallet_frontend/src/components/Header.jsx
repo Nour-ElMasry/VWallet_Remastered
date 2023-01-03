@@ -29,10 +29,16 @@ const Header = (props) => {
         <header>
             <nav className="navbar container flex flex-jc-sb flex-ai-c">
                 <h1 className="brand">v-Wallet</h1>
-                {(props.log) && <div className="flex flex-ai-c navbar__links">
+                {(props.log && !props.admin) && <div className="flex flex-ai-c navbar__links">
                     <Link to="/creditCards">CreditCards</Link>
                     <Link to="/crypto">CryptoWallet</Link>
                     <Link to="/profile">Profile</Link>
+                    <Link className="logOut" onClick={handleClickOpen}><LogoutIcon /></Link>
+                </div>}
+                {(props.log && props.admin) && <div className="flex flex-ai-c navbar__links">
+                    <Link to="/admin/users">Users</Link>
+                    <Link to="/admin/creditCards">CerditCards</Link>
+                    <Link to="/admin/crypto">Crypto</Link>
                     <Link className="logOut" onClick={handleClickOpen}><LogoutIcon /></Link>
                 </div>}
             </nav>

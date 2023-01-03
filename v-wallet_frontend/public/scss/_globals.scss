@@ -208,6 +208,17 @@ p{
     }
 }
 
+.errorMsg{
+    color: $white;
+    text-align: center;
+    font-size: $font-md;
+    background-color: rgba(192, 28, 28, 0.918);
+    padding: .75rem 1rem;
+    border-radius: .75rem;
+    margin: 4rem auto;
+    width: max-content;
+}
+
 .emptyCards{
     padding: 0.5rem 0.75rem;
     background-color: #710c04;
