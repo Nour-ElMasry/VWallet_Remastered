@@ -17,7 +17,7 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsers, List<User>>
 
     public async Task<List<User>> Handle(GetAllUsers request, CancellationToken cancellationToken)
     {
-        var users = await _userManager.Users.ToListAsync(cancellationToken: cancellationToken);
+        var users = await _userManager.Users.Include(u => u.UserAddress).ToListAsync(cancellationToken: cancellationToken);
 
         return users;
     }

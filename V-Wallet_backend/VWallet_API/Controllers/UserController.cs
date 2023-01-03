@@ -96,6 +96,34 @@ public class UserController : ControllerBase
         return Ok(result);
     }
 
+
+    [HttpPost]
+    [Route("CreateAdmin")]
+    public async Task<IActionResult> CreateAdmin([FromBody] UserPostDto user)
+    {
+        _logger.LogInformation("Preparing to create an admin user...");
+
+        if (!ModelState.IsValid)
+        {
+            _logger.LogError("Information received was invalid!!");
+            return BadRequest(ModelState);
+        }
+
+        var command = _mapper.Map<CreateAdmin>(user);
+
+        var result = await _mediator.Send(command);
+
+        if (result == null)
+        {
+            _logger.LogError($"Failed to create an admin user!!!");
+            return NotFound();
+        }
+
+        _logger.LogInformation("An Admin User created successfully!!!");
+
+        return Ok(result);
+    }
+
     [HttpPut]
     [Route("{id}")]
     [Authorize]
