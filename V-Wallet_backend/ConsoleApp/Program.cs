@@ -4,6 +4,7 @@ using Domain;
 using Infrastructure;
 using Infrastructure.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

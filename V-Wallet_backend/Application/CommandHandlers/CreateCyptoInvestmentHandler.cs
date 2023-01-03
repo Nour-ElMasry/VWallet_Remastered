@@ -46,12 +46,14 @@ public class CreateCyptoInvestmentHandler : IRequestHandler<CreateCryptoInvestme
             if (cc.Deposit >= investment)
             {
                 cc.Deposit -= investment;
+                cc.Transactions.Add(new Transaction(-investment, "Crypto Investment", request.Name));
                 investment = 0;
                 break;
             }
             else
             {
                 investment -= cc.Deposit;
+                cc.Transactions.Add(new Transaction(-cc.Deposit, "Crypto Investment", request.Name));
                 cc.Deposit = 0;
                 continue;
             }

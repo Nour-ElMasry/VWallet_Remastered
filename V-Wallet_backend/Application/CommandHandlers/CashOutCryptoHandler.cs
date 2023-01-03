@@ -38,6 +38,7 @@ public class CashOutCryptoHandler : IRequestHandler<CashOutCrypto, CryptoCurrenc
         foreach (var cc in user.CreditCards)
         {
             cc.Deposit += moneyPerCC;
+            cc.Transactions.Add(new Transaction(moneyPerCC, "Crypto Cash-Out", crypto.Name));
         }
 
         await _unitOfWork.CryptoRepository.DeleteCrypto(crypto);

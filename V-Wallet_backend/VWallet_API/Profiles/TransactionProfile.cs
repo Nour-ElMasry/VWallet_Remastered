@@ -13,6 +13,7 @@ public class TransactionProfile : Profile
             .ForMember(ud => ud.TransactionId, opt => opt.MapFrom(u => u.TransactionId))
             .ForMember(ud => ud.DateOfTransaction, opt => opt.MapFrom(u => u.DateOfTransaction))
             .ForMember(ud => ud.Amount, opt => opt.MapFrom(u => u.Amount))
+            .ForMember(ud => ud.TransactionType, opt => opt.MapFrom(u => u.TransactionType))
             .ForMember(ud => ud.TransactionIssuer, opt => opt.MapFrom(u => u.CCIban));
 
         CreateMap<TransactionPostDto, CreateTransaction>()
