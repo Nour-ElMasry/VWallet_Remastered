@@ -19,7 +19,7 @@ const CardsList = () => {
 
     const getData = async () => {
         GeneralAxoisService.getMethod("/" + user.customer.id + "/CreditCards/All").then((res) => {
-            setC({cards: res.data})
+            setC({cards: res.data.sort((c1, c2) => c2.deposit - c1.deposit )})
             setLoader(false)
         }).catch((err) => {
             setLoader(false)
@@ -127,10 +127,10 @@ const CardsList = () => {
         }else{
             return (
                 <div className="cardsList">
-                    {c.cards.sort((c1, c2) => c2.deposit - c1.deposit ).map((x, i) => {
+                    {c.cards.map((x) => {
                         return (
                             <Card 
-                                key={i}
+                                key={x.creditCardId}
                                 id={x.creditCardId}
                                 iban={x.iban} 
                                 amount={x.deposit}

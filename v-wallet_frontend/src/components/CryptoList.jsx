@@ -49,7 +49,6 @@ const CryptoList = () => {
     }
 
     const confirmInvest = (name, value, inv) => {
-        console.log(name.toString(), value, inv)
             if(deposit > inv){
                 GeneralAxoisService.postMethod("/" + user.customer.id + "/Crypto/Investment", 
                 {

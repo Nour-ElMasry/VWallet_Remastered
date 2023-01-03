@@ -69,7 +69,8 @@ const CardTransactions = (props) => {
           <TableCell sx={{ textAlign: 'center' }}>Amount</TableCell>
           <TableCell sx={{ textAlign: 'center' }}>Time</TableCell>
           <TableCell sx={{ textAlign: 'center' }}>Date</TableCell>
-          <TableCell sx={{ textAlign: 'center' }}>Sender/Sent To</TableCell>
+          <TableCell sx={{ textAlign: 'center' }}>Type</TableCell>
+          <TableCell sx={{ textAlign: 'center' }}>From/To</TableCell>
         </TableRow>
       </TableHead>
       <TableBody >
@@ -83,6 +84,7 @@ const CardTransactions = (props) => {
             </TableCell>
             <TableCell sx={{ textAlign: 'center' }}>{timeFormatter(row.dateOfTransaction)}</TableCell>
             <TableCell sx={{ textAlign: 'center' }}>{dateFormatter(row.dateOfTransaction)}</TableCell>
+            <TableCell sx={{ textAlign: 'center' }}>{row.transactionType}</TableCell>
             <TableCell sx={{ textAlign: 'center' }}>{row.transactionIssuer}</TableCell>
           </TableRow>
         ))}

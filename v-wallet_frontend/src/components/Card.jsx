@@ -27,10 +27,6 @@ const Card = (props) => {
         setRemoveCardDialog(false);
     };
 
-    
-    const ibanTrans = document.querySelector('[name="ibanTrans"]')
-    const depoTrans = document.querySelector('[name="moneyAmount"]')
-    const senderIban = document.querySelector('[name="senderIban"]')
     const overlay = document.getElementById("overlay")
 
     const dateFormatter = (date) => {
@@ -45,6 +41,8 @@ const Card = (props) => {
     const transAddBtn = () => {
         const transfer = document.getElementById("transferMoney");
         const hasTransFade = [document.querySelector(".has-fade"), document.querySelector(".has-transfade")];
+        const senderIban = document.querySelector('[name="senderIban"]')
+
         transfer.classList.add("transferMoney__active");
         hasTransFade.forEach(x =>{
             x.classList.add("fade-in");
@@ -56,6 +54,9 @@ const Card = (props) => {
     const closeTrans = () => { 
         const transfer = document.getElementById("transferMoney");
         const hasTransFade = [document.querySelector(".has-fade"), document.querySelector(".has-transfade")];
+        const ibanTrans = document.querySelector('[name="ibanTrans"]')
+        const depoTrans = document.querySelector('[name="moneyAmount"]')
+
         if(transfer.classList.contains("transferMoney__active")){
             transfer.classList.remove("transferMoney__active");
             hasTransFade.forEach(x =>{
@@ -70,6 +71,10 @@ const Card = (props) => {
     overlay.onclick = closeTrans
 
     const confirmTrans = ()=>{
+        const ibanTrans = document.querySelector('[name="ibanTrans"]')
+        const depoTrans = document.querySelector('[name="moneyAmount"]')
+        const senderIban = document.querySelector('[name="senderIban"]')
+        
         if(ibanTrans.value === senderIban.value){
             alert("Can't make transaction between the same ibans")
             return;
@@ -136,7 +141,7 @@ const Card = (props) => {
                 <input pattern="\d+" autoComplete="off" className="form-field" type="number" placeholder="ex: 20000" name="moneyAmount"/>
             </div>
             <input type="hidden" value={props.iban} name="senderIban"/>
-            <button className="cc" id="transMoney" onClick={confirmTrans}>Transfer Money</button>
+            <button className="cc" onClick={confirmTrans}>Transfer Money</button>
         </div>
         <div className="transPic">
             <img src="./images/transfer.png" alt="img"/>
@@ -144,6 +149,7 @@ const Card = (props) => {
     </div>
     <Dialog
         open={open}
+        maxWidth={'100%'}
     >
        <div className="cardInfoDialog">
         <div className="cardInfoDialog__Title flex flex-jc-sb flex-ai-c">
